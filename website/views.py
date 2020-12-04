@@ -65,3 +65,40 @@ def appointment(request):
 
     else :
         return render(request, 'home.html', {})
+
+def prendrerdv(request):
+    if request.method == "POST" :
+        nom = request.POST['nom']
+        prenom = request.POST['prenom']
+        email = request.POST['email']
+        telephone = request.POST['telephone']
+        laboratoire = request.POST['laboratoire']
+        jour = request.POST['jour']
+        heure = request.POST['heure']
+        motif = request.POST['motif']
+
+
+        # Send an email
+        contenu = prenom + " " + nom + " désire prendre rendez-vous au laboratoire " + laboratoire + " " + jour +\
+                  " à " + heure + " pour une prestation '" + motif + "'. Merci d'envoyer un mail de confirmation."
+        send_mail(
+            'Demande de rendez-vous ' + prenom + " " + nom, # subject
+            contenu, # message
+            email, # from email
+            ['cachouline@gmail.com'], # to email
+        )
+
+        return render(request, 'prendrerdv.html', {
+            'nom' : nom,
+            'prenom' : prenom,
+            'email' : email,
+            'telephone' : telephone,
+            'laboratoire' : laboratoire,
+            'jour' : jour,
+            'heure' : heure,
+            'motif' : motif
+            })
+        # We created a dictionary
+
+    else :
+        return render(request, 'prendrerdv.html', {})

@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Prendre rendez-vous{% endblock %}
+{% block meta_description %}Prendre rendez-vous{% endblock %}
+{% block content %}
+
+  <!-- ***** Breadcrumb Area Start ***** -->
+  <div class="breadcumb-area bg-img bg-gradient-overlay" style="background-image: url({% static 'website/img/bg-img/12.jpg' %});">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-12">
+          <h2 class="title">Prendre rendez-vous</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="breadcumb--con">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Prendre rendez-vous</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Breadcrumb Area End ***** -->
+
+{% if jour %}
+  <center>
+    <h2> Merci pour votre prise de rendez-vous {{ prenom }} !</h2>
+    <p> Vous recevrez très bientôt un email de confirmation.</p>
+  </center>
+  <br/><br/><br/>
+{% else %}
+
+<!-- Book An Oppointment Area Start -->
+  <section class="book-an-oppointment-area section-padding-100">
+    <div class="container">
+      <div class="row">
+        <!-- Section Heading -->
+        <div class="col-12">
+          <div class="section-heading text-center black">
+            <h2>Prendre rendez-vous</h2>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <!-- Appointment Form -->
+          <div class="contact-form">
+            <form action="{% url 'prendrerdv' %}" method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group mb-30">
+                    <input type="text" name="nom" class="form-control" placeholder="Nom" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-30">
+                    <input type="text" name="prenom" class="form-control" placeholder="Prénom" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-30">
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-30">
+                    <input type="text" name="telephone" class="form-control" placeholder="Téléphone">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-30">
+                    <select name="laboratoire" class="form-control">
+                      <option value="Choose Your Scheldule">Choisissez votre laboratoire</option>
+                      <option value="LABO XV">LABO XV - 353 rue de Vaugirard - 75015 Paris</option>
+                      <option value="MOZART">MOZART - 16 avenue Mozart - 75016 Paris</option>
+                      <option value="THIAIS">THIAIS - 19 rue Pavé de Grignon - 94320 Thiais</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-30">
+                    <select name="jour" class="form-control">
+                      <option value="Choose Your Time">Choisissez la date</option>
+                      <option value="Lundi">Lundi</option>
+                      <option value="Mardi">Mardi</option>
+                      <option value="Mercredi">Mercredi</option>
+                      <option value="Jeudi">Jeudi</option>
+                      <option value="Vendredi">Vendredi</option>
+                      <option value="Samedi">Samedi</option>
+                      <option value="Dimanche">Dimanche</option>
+
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-30">
+                    <select name="heure" class="form-control">
+                      <option value="Choose Your Time">Choisissez l'horaire</option>
+                      <option value="8h">8h</option>
+                      <option value="9h">9h</option>
+                      <option value="10h">10h</option>
+                      <option value="11h">11h</option>
+                      <option value="12h">12h</option>
+                      <option value="13h">13h</option>
+                      <option value="14h">14h</option>
+
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-30">
+                    <select name="motif" class="form-control">
+                      <option value="Choose Your Time">Choisissez le motif</option>
+                      <option value="pcr">Test PCR Covid-19</option>
+                      <option value="domicile">Domiciles</option>
+                      <option value="autres">Autres examens</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <button type="submit" class="btn dento-btn">Prendre rdv !</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Book An Oppointment Area End -->
+
+{% endif %}
+
+
+{% endblock %}
